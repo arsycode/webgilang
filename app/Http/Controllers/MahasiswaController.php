@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -53,6 +55,20 @@ class MahasiswaController extends Controller
             'jurusan'  => $request->jurusan,
             'email'  => $request->email
         ]);
+
+        $mahasiswa = Mahasiswa::create($request->all());
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('images/',$request->file('foto')->getClientOriginalName());
+            $mahasiswa->foto = $request->file('foto')->GetClientOriginalName();
+            $mahasiswa->save();
+        }
+
+        if($request->hasFile('no_ktp')){
+            $request->file('no_ktp')->move('images/',$request->file('no_ktp')->getClientOriginalName());
+            $mahasiswa->foto = $request->file('no_ktp')->GetClientOriginalName();
+            $mahasiswa->save();
+        }
+
         return redirect('/mahasiswa');
     }
 
@@ -136,5 +152,27 @@ class MahasiswaController extends Controller
     }
         return view('admin.mahasiswa.index',['mahasiswa' => $mahasiswa]);
     
+    }
+
+    //one to one relationship
+    public function wali(){
+        $mahasiswa   = Mahasiswa::all();
+        return view('admin.mahasiswa.wali',['mahasiswa' => $mahasiswa]);
+    }
+
+    public function dosen(){
+        $dosen = Dosen::all();
+        return view('admin.mahasiswa.dosen',['dosen' => $dosen]);
+    }
+
+    public function matkul(){
+        $mahasiswa = Mahasiswa::get();
+        return view('admin.mahasiswa.matkul',['mahasiswa' => $mahasiswa]);
+    }
+
+    public function downloadpdf(){
+        $mahasiswa = Mahasiswa::all();
+        $pdf = PDF::loadview('admin.mahasiswa.index',['mahasiswa' => $mahasiswa])->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('laporan_mhs.pdf');
     }
 }

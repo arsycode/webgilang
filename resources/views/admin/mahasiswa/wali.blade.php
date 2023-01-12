@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Data Mahasiswa</h3>
-            <a href="{{url('/downloadpdf')}}" target="_blank" class="btn btn-info btn-md">Download PDF</a>
+
             <div class="card-tools">
                 <form action="/mahasiswa/search" class="from-aliane" method="GET">
                     <div class="input-group-append">
@@ -28,8 +28,8 @@
                         <th>Alamat</th>
                         <th>No HP</th>
                         <th>Jurusan</th>
-                        <th>Email</th>
-                        <th>Opsi</th>
+                        <th>Nama Wali</th>
+                        <th>Pekerjaan Wali</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,11 +40,8 @@
                         <td>{{$mahasiswa->alamat}}</td>
                         <td>{{$mahasiswa->hp}}</td>
                         <td>{{$mahasiswa->jurusan}}</td>
-                        <td>{{$mahasiswa->email}}</td>
-                        <td><a href="/mahasiswa/{{$mahasiswa->id}}/edit" class="btn btn-warning">Edit</a>
-                            <a href="/mahasiswa/{{$mahasiswa->id}}/delete" class="btn btn-danger"
-                                onclick="return confirm('Mahasiswa {{$mahasiswa->nama}} Akan Dihapus')">Hapus</a>
-                        </td>
+                        <td>{{$mahasiswa->wali['nama_wali']}}</td>
+                        <td>{{$mahasiswa->wali['pekerjaan']}}</td>
                     </tr>
                     @endforeach
 

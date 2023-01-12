@@ -5,8 +5,8 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Data Mahasiswa</h3>
-            <a href="{{url('/downloadpdf')}}" target="_blank" class="btn btn-info btn-md">Download PDF</a>
+            <h3 class="card-title">Data Dosen</h3>
+
             <div class="card-tools">
                 <form action="/mahasiswa/search" class="from-aliane" method="GET">
                     <div class="input-group-append">
@@ -23,27 +23,20 @@
             <table class="table table-hover text-nowrap">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>Gender</th>
-                        <th>Alamat</th>
-                        <th>No HP</th>
-                        <th>Jurusan</th>
-                        <th>Email</th>
-                        <th>Opsi</th>
+                        <th>NIDN</th>
+                        <th>Nama Dosen</th>
+                        <th>Nama Mahasiswa</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mahasiswa as $mahasiswa)
+                    @foreach ($dosen as $dosen)
                     <tr>
-                        <td>{{$mahasiswa->nama}}</td>
-                        <td>{{$mahasiswa->jenkel}}</td>
-                        <td>{{$mahasiswa->alamat}}</td>
-                        <td>{{$mahasiswa->hp}}</td>
-                        <td>{{$mahasiswa->jurusan}}</td>
-                        <td>{{$mahasiswa->email}}</td>
-                        <td><a href="/mahasiswa/{{$mahasiswa->id}}/edit" class="btn btn-warning">Edit</a>
-                            <a href="/mahasiswa/{{$mahasiswa->id}}/delete" class="btn btn-danger"
-                                onclick="return confirm('Mahasiswa {{$mahasiswa->nama}} Akan Dihapus')">Hapus</a>
+                        <td>{{$dosen->nidn}}</td>
+                        <td>{{$dosen->nama_dosen}}</td>
+                        <td>
+                            @foreach ($dosen->mahasiswa as $mhs)
+                                {{$mhs->nama}}, 
+                            @endforeach
                         </td>
                     </tr>
                     @endforeach

@@ -8,7 +8,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form action="{{url('/mahasiswa/store')}}" method="POST">
+    <form action="{{url('/mahasiswa/store')}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="card-body">
             <div class="form-group">
@@ -42,7 +42,24 @@
                 <label for="exampleInputEmail1">Email</label>
                 <input type="email" name="email" class="form-control" id="email" placeholder="Masukan Email">
             </div>
-            
+
+            <div class="card card-danger">
+                <div class="card-header">
+                    <div class="card-title">Upload Dokumen</div>
+                </div>
+            </div>
+
+            <label for="foto" class="form-label">Foto</label>
+            <div class="input-group mb-3">
+                <input type="file" name="foto" id="inputGroupFile" class="form-control">
+                <label for="inputGroupFile" class="input-group-text">Upload</label> 
+            </div>
+
+            <label for="no_ktp" class="form-label">No KTP</label>
+            <div class="input-group mb-3">
+                <input type="file" name="no_ktp" id="inputGroupFile2" class="form-control">
+                <label for="inputGroupFile" class="input-group-text">Upload</label> 
+            </div>  
         </div>
         <!-- /.card-body -->
 
